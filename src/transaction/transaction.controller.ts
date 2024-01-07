@@ -36,6 +36,12 @@ export class TransactionController {
     return this.transactionService.findAll(+req.user.id);
   }
 
+  @Get(':type/find')
+  @UseGuards(JwtAuthGuard)
+  getAllByType(@Req() req, @Param('type') type: string) {
+    return this.transactionService.getAllByType(+req.user.id, type);
+  }
+
   @Get('pagination')
   @UseGuards(JwtAuthGuard)
   findAllWithPagination(

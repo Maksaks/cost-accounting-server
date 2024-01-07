@@ -93,4 +93,17 @@ export class TransactionService {
     });
     return transactions;
   }
+
+  async getAllByType(id: number, type: string) {
+    const transactions = await this.transactionRepository.find({
+      where: { user: { id }, type },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
+    const total = transactions.reduce((acc, trans) => {
+      return acc + trans.amount;
+    }, 0);
+    return { total, transactions };
+  }
 }
