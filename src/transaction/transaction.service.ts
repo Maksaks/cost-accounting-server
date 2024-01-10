@@ -38,6 +38,9 @@ export class TransactionService {
       order: {
         createdAt: 'DESC',
       },
+      relations: {
+        category: true,
+      },
     });
     return transactions;
   }
@@ -104,6 +107,6 @@ export class TransactionService {
     const total = transactions.reduce((acc, trans) => {
       return acc + trans.amount;
     }, 0);
-    return { total, transactions };
+    return total;
   }
 }
